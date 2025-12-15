@@ -1,0 +1,610 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1deb3
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Dec 14, 2025 at 02:00 PM
+-- Server version: 10.11.13-MariaDB-0ubuntu0.24.04.1
+-- PHP Version: 8.3.6
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `wprocise_3_db`
+--
+CREATE DATABASE IF NOT EXISTS `wprocise_3_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `wprocise_3_db`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `COACH`
+--
+
+DROP TABLE IF EXISTS `COACH`;
+CREATE TABLE `COACH` (
+  `COACH_ID` int(4) NOT NULL,
+  `TEAM_ID` int(3) NOT NULL,
+  `COACH_FNAME` varchar(30) NOT NULL,
+  `COACH_LNAME` varchar(30) NOT NULL,
+  `COACH_POS_TITLE` varchar(40) NOT NULL,
+  `COACH_HIRE_DATE` date NOT NULL,
+  `COACH_SALARY` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `COACH`
+--
+
+INSERT INTO `COACH` (`COACH_ID`, `TEAM_ID`, `COACH_FNAME`, `COACH_LNAME`, `COACH_POS_TITLE`, `COACH_HIRE_DATE`, `COACH_SALARY`) VALUES
+(3001, 101, 'Curt', 'Cignetti', 'Head Coach', '2023-12-01', 5200000.00),
+(3002, 102, 'Ryan', 'Day', 'Head Coach', '2019-01-02', 12000000.00),
+(3003, 103, 'Sherrone', 'Moore', 'Head Coach', '2024-01-01', 8500000.00),
+(3004, 104, 'James', 'Franklin', 'Head Coach', '2014-01-09', 9000000.00),
+(3005, 105, 'Ryan', 'Walters', 'Head Coach', '2022-12-01', 4500000.00);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `CONFERENCE`
+--
+
+DROP TABLE IF EXISTS `CONFERENCE`;
+CREATE TABLE `CONFERENCE` (
+  `CONF_ID` int(2) NOT NULL,
+  `CONF_NAME` varchar(5) NOT NULL,
+  `CONF_FOUNDED_YEAR` date NOT NULL,
+  `CONF_HQ_CITY` varchar(25) NOT NULL,
+  `CONF_HQ_STATE` char(2) NOT NULL,
+  `CONF_COMMISSIONER_NAME` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `CONFERENCE`
+--
+
+INSERT INTO `CONFERENCE` (`CONF_ID`, `CONF_NAME`, `CONF_FOUNDED_YEAR`, `CONF_HQ_CITY`, `CONF_HQ_STATE`, `CONF_COMMISSIONER_NAME`) VALUES
+(1, 'B1G', '1896-01-01', 'Rosemont', 'IL', 'Tony Petitti'),
+(2, 'SEC', '1932-01-01', 'Birmingham', 'AL', 'Greg Sankey'),
+(3, 'ACC', '1953-01-01', 'Charlotte', 'NC', 'Jim Phillips'),
+(4, 'PAC', '1915-01-01', 'San Francisco', 'CA', 'Teresa Gould'),
+(5, 'XII', '1994-01-01', 'Irving', 'TX', 'Brett Yormark');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `CONFERENCEREVENUE`
+--
+
+DROP TABLE IF EXISTS `CONFERENCEREVENUE`;
+CREATE TABLE `CONFERENCEREVENUE` (
+  `CONF_REV_ID` int(2) NOT NULL,
+  `CONF_ID` int(2) NOT NULL,
+  `CONF_REV_FISCAL_YEAR` int(4) NOT NULL,
+  `CONF_REV_SOURCE_TYPE` varchar(30) NOT NULL,
+  `CONF_REV_TOT` int(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `CONFERENCEREVENUE`
+--
+
+INSERT INTO `CONFERENCEREVENUE` (`CONF_REV_ID`, `CONF_ID`, `CONF_REV_FISCAL_YEAR`, `CONF_REV_SOURCE_TYPE`, `CONF_REV_TOT`) VALUES
+(9901, 1, 2024, 'Media Rights', 850000000),
+(9902, 1, 2024, 'Championship Game', 25000000),
+(9903, 1, 2024, 'Sponsorships', 48000000),
+(9904, 1, 2024, 'Bowl Revenue Share', 92000000),
+(9905, 1, 2024, 'Playoff Distribution', 140000000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DEFENSIVEPLAYERSTATS`
+--
+
+DROP TABLE IF EXISTS `DEFENSIVEPLAYERSTATS`;
+CREATE TABLE `DEFENSIVEPLAYERSTATS` (
+  `PLAYER_ID` int(7) NOT NULL,
+  `SEASON_YEAR` int(4) NOT NULL,
+  `DEF_GAMES_PLAYED` int(2) NOT NULL,
+  `DEF_INTERCEPTIONS` int(2) NOT NULL,
+  `DEF_TACKLES` int(3) NOT NULL,
+  `DEF_SACKS` int(2) NOT NULL,
+  `DEF_FORCED_FUMBLES` int(2) NOT NULL,
+  `DEF_PASS_BREAK_UPS` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `DEFENSIVEPLAYERSTATS`
+--
+
+INSERT INTO `DEFENSIVEPLAYERSTATS` (`PLAYER_ID`, `SEASON_YEAR`, `DEF_GAMES_PLAYED`, `DEF_INTERCEPTIONS`, `DEF_TACKLES`, `DEF_SACKS`, `DEF_FORCED_FUMBLES`, `DEF_PASS_BREAK_UPS`) VALUES
+(500004, 2024, 13, 2, 85, 6, 1, 5),
+(500007, 2024, 12, 2, 42, 0, 1, 8),
+(500008, 2024, 13, 4, 55, 1, 2, 10),
+(500009, 2024, 12, 0, 37, 5, 1, 3),
+(500010, 2024, 13, 1, 68, 4, 2, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `GAME`
+--
+
+DROP TABLE IF EXISTS `GAME`;
+CREATE TABLE `GAME` (
+  `GAME_ID` int(7) NOT NULL,
+  `SEASON_YEAR` int(4) NOT NULL,
+  `GAME_WK_NUM` int(2) NOT NULL,
+  `HOME_TEAM_ID` int(3) NOT NULL,
+  `AWAY_TEAM_ID` int(3) NOT NULL,
+  `STADIUM_ID` int(3) NOT NULL,
+  `GAME_DATE` date NOT NULL,
+  `GAME_KICKOFF_TIME` datetime NOT NULL,
+  `GAME_ATTENDANCE` int(6) NOT NULL,
+  `GAME_HOME_SCORE` int(2) NOT NULL,
+  `GAME_AWAY_SCORE` int(2) NOT NULL,
+  `GAME_TV_NETWORK` varchar(20) NOT NULL
+) ;
+
+--
+-- Dumping data for table `GAME`
+--
+
+INSERT INTO `GAME` (`GAME_ID`, `SEASON_YEAR`, `GAME_WK_NUM`, `HOME_TEAM_ID`, `AWAY_TEAM_ID`, `STADIUM_ID`, `GAME_DATE`, `GAME_KICKOFF_TIME`, `GAME_ATTENDANCE`, `GAME_HOME_SCORE`, `GAME_AWAY_SCORE`, `GAME_TV_NETWORK`) VALUES
+(700001, 2024, 1, 101, 105, 201, '2024-09-01', '2024-09-01 19:30:00', 98750, 38, 17, 'FOX'),
+(700002, 2024, 2, 102, 104, 202, '2024-09-08', '2024-09-08 15:30:00', 106300, 27, 24, 'CBS'),
+(700003, 2024, 3, 103, 101, 203, '2024-09-15', '2024-09-15 12:00:00', 103200, 21, 28, 'ESPN'),
+(700004, 2024, 4, 104, 102, 204, '2024-09-22', '2024-09-22 15:00:00', 78750, 17, 31, 'BTN'),
+(700005, 2024, 5, 105, 103, 205, '2024-09-29', '2024-09-29 20:00:00', 65000, 24, 20, 'NBC');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `GAMEPARTICIPATION`
+--
+
+DROP TABLE IF EXISTS `GAMEPARTICIPATION`;
+CREATE TABLE `GAMEPARTICIPATION` (
+  `PLAYER_ID` int(7) NOT NULL,
+  `GAME_ID` int(7) NOT NULL,
+  `GP_TOT_MIN_PLAYED` int(2) NOT NULL,
+  `GP_GAME_RATING` decimal(3,1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `GAMEPARTICIPATION`
+--
+
+INSERT INTO `GAMEPARTICIPATION` (`PLAYER_ID`, `GAME_ID`, `GP_TOT_MIN_PLAYED`, `GP_GAME_RATING`) VALUES
+(500001, 700001, 58, 77.5),
+(500002, 700001, 49, 80.2),
+(500003, 700005, 62, 92.1),
+(500004, 700003, 60, 85.4),
+(500005, 700004, 55, 73.9);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `OFFENSIVEPLAYERSTATS`
+--
+
+DROP TABLE IF EXISTS `OFFENSIVEPLAYERSTATS`;
+CREATE TABLE `OFFENSIVEPLAYERSTATS` (
+  `PLAYER_ID` int(7) NOT NULL,
+  `SEASON_YEAR` int(4) NOT NULL,
+  `OFF_GAMES_PLAYED` int(2) NOT NULL,
+  `OFF_PASS_YARDS` int(4) NOT NULL,
+  `OFF_RUSH_YARDS` int(4) NOT NULL,
+  `OFF_RECEIVING_YARDS` int(4) NOT NULL,
+  `OFF_TOUCHDOWNS` int(2) NOT NULL,
+  `OFF_INTERCEPTIONS_THROWN` int(2) NOT NULL,
+  `OFF_FUMBLES_LOST` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `OFFENSIVEPLAYERSTATS`
+--
+
+INSERT INTO `OFFENSIVEPLAYERSTATS` (`PLAYER_ID`, `SEASON_YEAR`, `OFF_GAMES_PLAYED`, `OFF_PASS_YARDS`, `OFF_RUSH_YARDS`, `OFF_RECEIVING_YARDS`, `OFF_TOUCHDOWNS`, `OFF_INTERCEPTIONS_THROWN`, `OFF_FUMBLES_LOST`) VALUES
+(500001, 2024, 12, 2410, 210, 0, 18, 10, 3),
+(500002, 2024, 11, 0, 1215, 280, 14, 0, 2),
+(500003, 2024, 13, 3120, 310, 0, 24, 5, 1),
+(500005, 2024, 12, 2567, 150, 0, 19, 7, 2),
+(500006, 2024, 12, 0, 310, 765, 6, 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `PLAYER`
+--
+
+DROP TABLE IF EXISTS `PLAYER`;
+CREATE TABLE `PLAYER` (
+  `PLAYER_ID` int(7) NOT NULL,
+  `TEAM_ID` int(3) NOT NULL,
+  `PLAYER_FNAME` varchar(30) NOT NULL,
+  `PLAYER_LNAME` varchar(30) NOT NULL,
+  `PLAYER_POS` varchar(20) NOT NULL,
+  `PLAYER_JERSEY_NUM` int(11) NOT NULL,
+  `PLAYER_CLASS_YEAR` varchar(20) NOT NULL,
+  `PLAYER_BIRTH_DATE` date NOT NULL,
+  `PLAYER_HOMETOWN_CITY` varchar(25) NOT NULL,
+  `PLAYER_HOMETOWN_STATE` char(2) NOT NULL,
+  `PLAYER_HOMETOWN_ZIP` char(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `PLAYER`
+--
+
+INSERT INTO `PLAYER` (`PLAYER_ID`, `TEAM_ID`, `PLAYER_FNAME`, `PLAYER_LNAME`, `PLAYER_POS`, `PLAYER_JERSEY_NUM`, `PLAYER_CLASS_YEAR`, `PLAYER_BIRTH_DATE`, `PLAYER_HOMETOWN_CITY`, `PLAYER_HOMETOWN_STATE`, `PLAYER_HOMETOWN_ZIP`) VALUES
+(500001, 101, 'Tayven', 'Jackson', 'QB', 2, 'Sophomore', '2004-03-21', 'Greenwood', 'IN', '46142'),
+(500002, 102, 'TreVeyon', 'Henderson', 'RB', 32, 'Junior', '2003-10-22', 'Hopewell', 'VA', '23860'),
+(500003, 103, 'J.J.', 'McCarthy', 'QB', 9, 'Senior', '2003-01-19', 'La Grange', 'IL', '60525'),
+(500004, 104, 'Abdul', 'Carter', 'LB', 11, 'Junior', '2004-01-21', 'Philadelphia', 'PA', '19103'),
+(500005, 105, 'Hudson', 'Card', 'QB', 1, 'Senior', '2002-07-29', 'Austin', 'TX', '78701'),
+(500006, 101, 'Jaylin', 'Lucas', 'WR', 12, 'Junior', '2004-03-12', 'Houma', 'LA', '70360'),
+(500007, 102, 'Denzel', 'Burke', 'CB', 10, 'Senior', '2003-11-20', 'Phoenix', 'AZ', '85001'),
+(500008, 103, 'Mike', 'Sainristil', 'DB', 0, 'Senior', '2002-10-19', 'Everett', 'MA', '02149'),
+(500009, 104, 'Chop', 'Robinson', 'DE', 44, 'Senior', '2003-04-25', 'Gaithersburg', 'MD', '20877'),
+(500010, 105, 'Kydran', 'Jenkins', 'LB', 4, 'Senior', '2002-05-29', 'Louisville', 'GA', '30434');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `SCHEDULE`
+--
+
+DROP TABLE IF EXISTS `SCHEDULE`;
+CREATE TABLE `SCHEDULE` (
+  `SCHEDULE_ID` int(3) NOT NULL,
+  `TEAM_ID` int(3) NOT NULL,
+  `SCHEDULE_YEAR` int(4) NOT NULL,
+  `SCHEDULE_STRENGTH_RANK` int(3) NOT NULL,
+  `SCHEDULE_BYE_WEEK` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `SCHEDULE`
+--
+
+INSERT INTO `SCHEDULE` (`SCHEDULE_ID`, `TEAM_ID`, `SCHEDULE_YEAR`, `SCHEDULE_STRENGTH_RANK`, `SCHEDULE_BYE_WEEK`) VALUES
+(8001, 101, 2024, 55, 6),
+(8002, 102, 2024, 8, 5),
+(8003, 103, 2024, 4, 7),
+(8004, 104, 2024, 12, 8),
+(8005, 105, 2024, 38, 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `SEASONSTATS`
+--
+
+DROP TABLE IF EXISTS `SEASONSTATS`;
+CREATE TABLE `SEASONSTATS` (
+  `TEAM_ID` int(3) NOT NULL,
+  `SEASON_YEAR` int(4) NOT NULL,
+  `TEAM_WINS` int(2) NOT NULL,
+  `TEAM_LOSSES` int(2) NOT NULL,
+  `TEAM_AVG_POINTS_SCORED` decimal(3,1) NOT NULL,
+  `TEAM_AVG_POINTS_ALLOWED` decimal(3,1) NOT NULL,
+  `TEAM_BOWL_GAME` varchar(20) DEFAULT NULL,
+  `TEAM_FINAL_RANK` int(2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `SEASONSTATS`
+--
+
+INSERT INTO `SEASONSTATS` (`TEAM_ID`, `SEASON_YEAR`, `TEAM_WINS`, `TEAM_LOSSES`, `TEAM_AVG_POINTS_SCORED`, `TEAM_AVG_POINTS_ALLOWED`, `TEAM_BOWL_GAME`, `TEAM_FINAL_RANK`) VALUES
+(101, 2024, 5, 7, 22.4, 27.5, NULL, NULL),
+(102, 2024, 12, 1, 34.6, 13.2, 'Cotton Bowl', 4),
+(103, 2024, 13, 1, 33.2, 10.5, 'Rose Bowl', 1),
+(104, 2024, 10, 3, 29.3, 16.3, 'Peach Bowl', 8),
+(105, 2024, 7, 6, 26.1, 23.7, 'Music City Bowl', 23);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `STADIUM`
+--
+
+DROP TABLE IF EXISTS `STADIUM`;
+CREATE TABLE `STADIUM` (
+  `STADIUM_ID` int(3) NOT NULL,
+  `STADIUM_NAME` varchar(50) NOT NULL,
+  `STADIUM_CAPACITY` int(6) NOT NULL,
+  `STADIUM_SURFACE_TYPE` varchar(5) NOT NULL,
+  `STADIUM_CITY` varchar(25) NOT NULL,
+  `STADIUM_STATE` char(2) NOT NULL,
+  `STADIUM_ZIP` char(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `STADIUM`
+--
+
+INSERT INTO `STADIUM` (`STADIUM_ID`, `STADIUM_NAME`, `STADIUM_CAPACITY`, `STADIUM_SURFACE_TYPE`, `STADIUM_CITY`, `STADIUM_STATE`, `STADIUM_ZIP`) VALUES
+(201, 'Memorial Stadium', 52326, 'Turf', 'Bloomington', 'IN', '47408'),
+(202, 'Ohio Stadium', 102780, 'Turf', 'Columbus', 'OH', '43210'),
+(203, 'Michigan Stadium', 107601, 'Grass', 'Ann Arbor', 'MI', '48104'),
+(204, 'Beaver Stadium', 106572, 'Grass', 'State College', 'PA', '16801'),
+(205, 'Ross-Ade Stadium', 57382, 'Grass', 'West Lafayette', 'IN', '47906');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `TEAM`
+--
+
+DROP TABLE IF EXISTS `TEAM`;
+CREATE TABLE `TEAM` (
+  `TEAM_ID` int(3) NOT NULL,
+  `CONF_ID` int(2) NOT NULL,
+  `TEAM_NAME` varchar(20) NOT NULL,
+  `TEAM_MASCOT` varchar(25) NOT NULL,
+  `TEAM_CITY` varchar(25) NOT NULL,
+  `TEAM_STATE` char(2) NOT NULL,
+  `TEAM_COLORS` varchar(50) NOT NULL,
+  `STADIUM_ID` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `TEAM`
+--
+
+INSERT INTO `TEAM` (`TEAM_ID`, `CONF_ID`, `TEAM_NAME`, `TEAM_MASCOT`, `TEAM_CITY`, `TEAM_STATE`, `TEAM_COLORS`, `STADIUM_ID`) VALUES
+(101, 1, 'Indiana', 'Hoosiers', 'Bloomington', 'IN', 'Cream/Crimson', 201),
+(102, 1, 'Ohio State', 'Buckeyes', 'Columbus', 'OH', 'Scarlet/Gray', 202),
+(103, 1, 'Michigan', 'Wolverines', 'Ann Arbor', 'MI', 'Maize/Blue', 203),
+(104, 1, 'Penn State', 'Nittany Lions', 'State College', 'PA', 'Blue/White', 204),
+(105, 1, 'Purdue', 'Boilermakers', 'West Lafayette', 'IN', 'Black/Gold', 205);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `TEAMREVENUE`
+--
+
+DROP TABLE IF EXISTS `TEAMREVENUE`;
+CREATE TABLE `TEAMREVENUE` (
+  `TEAM_REV_ID` int(2) NOT NULL,
+  `TEAM_ID` int(3) NOT NULL,
+  `TEAM_REV_FISCAL_YEAR` int(4) NOT NULL,
+  `TEAM_REV_SOURCE_TYPE` varchar(30) NOT NULL,
+  `TEAM_REV_TOT` int(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `TEAMREVENUE`
+--
+
+INSERT INTO `TEAMREVENUE` (`TEAM_REV_ID`, `TEAM_ID`, `TEAM_REV_FISCAL_YEAR`, `TEAM_REV_SOURCE_TYPE`, `TEAM_REV_TOT`) VALUES
+(9501, 101, 2024, 'Ticket Sales', 31000000),
+(9502, 101, 2024, 'Media Rights', 84000000),
+(9503, 101, 2024, 'Donations', 60000000),
+(9504, 101, 2024, 'Merchandise', 33000000),
+(9505, 101, 2024, 'Corporate Sponsors', 27000000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `TEAMSPENDING`
+--
+
+DROP TABLE IF EXISTS `TEAMSPENDING`;
+CREATE TABLE `TEAMSPENDING` (
+  `SPENDING_ID` int(2) NOT NULL,
+  `TEAM_ID` int(3) NOT NULL,
+  `SPENDING_FISCAL_YEAR` int(4) NOT NULL,
+  `SPENDING_RECRUITING` int(8) NOT NULL,
+  `SPENDING_COACHING_STAFF` int(8) NOT NULL,
+  `SPENDING_FOOTBALL_FACILITIES` int(9) NOT NULL,
+  `SPENDING_TOTAL` int(9) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `TEAMSPENDING`
+--
+
+INSERT INTO `TEAMSPENDING` (`SPENDING_ID`, `TEAM_ID`, `SPENDING_FISCAL_YEAR`, `SPENDING_RECRUITING`, `SPENDING_COACHING_STAFF`, `SPENDING_FOOTBALL_FACILITIES`, `SPENDING_TOTAL`) VALUES
+(9001, 101, 2024, 4500000, 8200000, 23000000, 35700000),
+(9002, 102, 2024, 6500000, 18000000, 40000000, 64500000),
+(9003, 103, 2024, 6000000, 15500000, 52000000, 73500000),
+(9004, 104, 2024, 5000000, 14000000, 31000000, 50000000),
+(9005, 105, 2024, 4200000, 9000000, 20000000, 33200000);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `COACH`
+--
+ALTER TABLE `COACH`
+  ADD PRIMARY KEY (`COACH_ID`),
+  ADD KEY `TEAM_ID` (`TEAM_ID`);
+
+--
+-- Indexes for table `CONFERENCE`
+--
+ALTER TABLE `CONFERENCE`
+  ADD PRIMARY KEY (`CONF_ID`);
+
+--
+-- Indexes for table `CONFERENCEREVENUE`
+--
+ALTER TABLE `CONFERENCEREVENUE`
+  ADD PRIMARY KEY (`CONF_REV_ID`),
+  ADD KEY `CONF_ID` (`CONF_ID`);
+
+--
+-- Indexes for table `DEFENSIVEPLAYERSTATS`
+--
+ALTER TABLE `DEFENSIVEPLAYERSTATS`
+  ADD PRIMARY KEY (`PLAYER_ID`,`SEASON_YEAR`);
+
+--
+-- Indexes for table `GAME`
+--
+ALTER TABLE `GAME`
+  ADD PRIMARY KEY (`GAME_ID`),
+  ADD KEY `HOME_TEAM_ID` (`HOME_TEAM_ID`),
+  ADD KEY `AWAY_TEAM_ID` (`AWAY_TEAM_ID`),
+  ADD KEY `STADIUM_ID` (`STADIUM_ID`);
+
+--
+-- Indexes for table `GAMEPARTICIPATION`
+--
+ALTER TABLE `GAMEPARTICIPATION`
+  ADD PRIMARY KEY (`PLAYER_ID`,`GAME_ID`),
+  ADD KEY `GAME_ID` (`GAME_ID`);
+
+--
+-- Indexes for table `OFFENSIVEPLAYERSTATS`
+--
+ALTER TABLE `OFFENSIVEPLAYERSTATS`
+  ADD PRIMARY KEY (`PLAYER_ID`,`SEASON_YEAR`);
+
+--
+-- Indexes for table `PLAYER`
+--
+ALTER TABLE `PLAYER`
+  ADD PRIMARY KEY (`PLAYER_ID`),
+  ADD KEY `TEAM_ID` (`TEAM_ID`);
+
+--
+-- Indexes for table `SCHEDULE`
+--
+ALTER TABLE `SCHEDULE`
+  ADD PRIMARY KEY (`SCHEDULE_ID`),
+  ADD KEY `TEAM_ID` (`TEAM_ID`);
+
+--
+-- Indexes for table `SEASONSTATS`
+--
+ALTER TABLE `SEASONSTATS`
+  ADD PRIMARY KEY (`TEAM_ID`,`SEASON_YEAR`);
+
+--
+-- Indexes for table `STADIUM`
+--
+ALTER TABLE `STADIUM`
+  ADD PRIMARY KEY (`STADIUM_ID`);
+
+--
+-- Indexes for table `TEAM`
+--
+ALTER TABLE `TEAM`
+  ADD PRIMARY KEY (`TEAM_ID`),
+  ADD KEY `CONF_ID` (`CONF_ID`),
+  ADD KEY `STADIUM_ID` (`STADIUM_ID`);
+
+--
+-- Indexes for table `TEAMREVENUE`
+--
+ALTER TABLE `TEAMREVENUE`
+  ADD PRIMARY KEY (`TEAM_REV_ID`),
+  ADD KEY `TEAM_ID` (`TEAM_ID`);
+
+--
+-- Indexes for table `TEAMSPENDING`
+--
+ALTER TABLE `TEAMSPENDING`
+  ADD PRIMARY KEY (`SPENDING_ID`),
+  ADD KEY `TEAM_ID` (`TEAM_ID`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `COACH`
+--
+ALTER TABLE `COACH`
+  ADD CONSTRAINT `COACH_ibfk_1` FOREIGN KEY (`TEAM_ID`) REFERENCES `TEAM` (`TEAM_ID`);
+
+--
+-- Constraints for table `CONFERENCEREVENUE`
+--
+ALTER TABLE `CONFERENCEREVENUE`
+  ADD CONSTRAINT `CONFERENCEREVENUE_ibfk_1` FOREIGN KEY (`CONF_ID`) REFERENCES `CONFERENCE` (`CONF_ID`);
+
+--
+-- Constraints for table `DEFENSIVEPLAYERSTATS`
+--
+ALTER TABLE `DEFENSIVEPLAYERSTATS`
+  ADD CONSTRAINT `DEFENSIVEPLAYERSTATS_ibfk_1` FOREIGN KEY (`PLAYER_ID`) REFERENCES `PLAYER` (`PLAYER_ID`);
+
+--
+-- Constraints for table `GAME`
+--
+ALTER TABLE `GAME`
+  ADD CONSTRAINT `GAME_ibfk_1` FOREIGN KEY (`HOME_TEAM_ID`) REFERENCES `TEAM` (`TEAM_ID`),
+  ADD CONSTRAINT `GAME_ibfk_2` FOREIGN KEY (`AWAY_TEAM_ID`) REFERENCES `TEAM` (`TEAM_ID`),
+  ADD CONSTRAINT `GAME_ibfk_3` FOREIGN KEY (`STADIUM_ID`) REFERENCES `STADIUM` (`STADIUM_ID`);
+
+--
+-- Constraints for table `GAMEPARTICIPATION`
+--
+ALTER TABLE `GAMEPARTICIPATION`
+  ADD CONSTRAINT `GAMEPARTICIPATION_ibfk_1` FOREIGN KEY (`PLAYER_ID`) REFERENCES `PLAYER` (`PLAYER_ID`),
+  ADD CONSTRAINT `GAMEPARTICIPATION_ibfk_2` FOREIGN KEY (`GAME_ID`) REFERENCES `GAME` (`GAME_ID`);
+
+--
+-- Constraints for table `OFFENSIVEPLAYERSTATS`
+--
+ALTER TABLE `OFFENSIVEPLAYERSTATS`
+  ADD CONSTRAINT `OFFENSIVEPLAYERSTATS_ibfk_1` FOREIGN KEY (`PLAYER_ID`) REFERENCES `PLAYER` (`PLAYER_ID`);
+
+--
+-- Constraints for table `PLAYER`
+--
+ALTER TABLE `PLAYER`
+  ADD CONSTRAINT `PLAYER_ibfk_1` FOREIGN KEY (`TEAM_ID`) REFERENCES `TEAM` (`TEAM_ID`);
+
+--
+-- Constraints for table `SCHEDULE`
+--
+ALTER TABLE `SCHEDULE`
+  ADD CONSTRAINT `SCHEDULE_ibfk_1` FOREIGN KEY (`TEAM_ID`) REFERENCES `TEAM` (`TEAM_ID`);
+
+--
+-- Constraints for table `SEASONSTATS`
+--
+ALTER TABLE `SEASONSTATS`
+  ADD CONSTRAINT `SEASONSTATS_ibfk_1` FOREIGN KEY (`TEAM_ID`) REFERENCES `TEAM` (`TEAM_ID`);
+
+--
+-- Constraints for table `TEAM`
+--
+ALTER TABLE `TEAM`
+  ADD CONSTRAINT `TEAM_ibfk_1` FOREIGN KEY (`CONF_ID`) REFERENCES `CONFERENCE` (`CONF_ID`),
+  ADD CONSTRAINT `TEAM_ibfk_2` FOREIGN KEY (`STADIUM_ID`) REFERENCES `STADIUM` (`STADIUM_ID`);
+
+--
+-- Constraints for table `TEAMREVENUE`
+--
+ALTER TABLE `TEAMREVENUE`
+  ADD CONSTRAINT `TEAMREVENUE_ibfk_1` FOREIGN KEY (`TEAM_ID`) REFERENCES `TEAM` (`TEAM_ID`);
+
+--
+-- Constraints for table `TEAMSPENDING`
+--
+ALTER TABLE `TEAMSPENDING`
+  ADD CONSTRAINT `TEAMSPENDING_ibfk_1` FOREIGN KEY (`TEAM_ID`) REFERENCES `TEAM` (`TEAM_ID`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
