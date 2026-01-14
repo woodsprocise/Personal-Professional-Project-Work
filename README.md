@@ -1,8 +1,8 @@
-# Advanced Sports Analytics Portfolio - Woods Procise
+# Woods Procise Work Portfolio
 
 ## About Me
 
-I am an Applied Data Science graduate student at **Indiana University Indianapolis** and an aspiring data analyst with a strong interest in sports analytics. I am a highly motivated graduate student seeking to leverage a solid academic foundation, strong work ethic, innovative problem‑solving, and data science skills to contribute to a **community‑focused, forward‑thinking sports‑centered organization**.
+I am an Applied Data Science graduate student at **Indiana University Indianapolis** and an aspiring data analyst. I am highly motivated and am seeking to leverage my solid academic foundation, strong work ethic, innovative problem‑solving, and data science skills to contribute to a **community‑focused, forward‑thinking organization**.
 
 ---
 
@@ -32,4 +32,4 @@ Each project below includes a brief description and a link to the full work:
 
 ---
 
-*Thank you for taking the time to review my work. I am always open to collaboration, feedback, and new opportunities in sports analytics.*
+*Thank you for taking the time to review my work. I am always open to collaboration, feedback, and new opportunities in analytics.*
